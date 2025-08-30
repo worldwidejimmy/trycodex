@@ -1,0 +1,32 @@
+[Unit]
+Description=Cool Things Web App
+After=network.target
+
+[Service]
+Type=simple
+# CHANGE THIS to a non-root user that owns the repo
+User=www-data
+Group=www-data
+
+# CHANGE THIS to your cloned repo path
+WorkingDirectory=/opt/cool-things
+Environment=NODE_ENV=production
+Environment=PORT=8080
+Environment=HOST=0.0.0.0
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=2
+# Increase open files if needed
+LimitNOFILE=65536
+
+# Hardening (optional, loosen if needed)
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+AmbientCapabilities=
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target
+
