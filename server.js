@@ -138,7 +138,11 @@ const server = http.createServer((req, res) => {
   }
 
   // Static files from dist
-  let filePath = path.join(distDir, pathname);
+  // Strip base path if app is served under a subpath
+  const basePath = '/trycodex';
+  let cleanPath = pathname.startsWith(basePath) ? pathname.slice(basePath.length) : pathname;
+  if (!cleanPath || cleanPath === '/') cleanPath = '/index.html';
+  let filePath = path.join(distDir, cleanPath);
 
   try {
     const stat = fs.statSync(filePath);

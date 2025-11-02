@@ -59,7 +59,7 @@ function settingsApiPlugin(){
 }
 
 export default defineConfig({
-  base: '/api/proxy/trycodex/dev/',
+  base: '/trycodex/',
   server: {
     host: true,
     port: 5173
